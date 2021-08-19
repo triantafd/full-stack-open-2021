@@ -11,3 +11,7 @@
 ## About the Diagram
 
 Some of the diagrams are powered by [mermaid](https://github.com/mermaid-js/mermaid).
+
+## Useful links
+
+1. [Web Sequence Diagrams](https://www.websequencediagrams.com/).
