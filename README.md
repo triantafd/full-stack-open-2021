@@ -9,6 +9,6 @@ This project is the exercises of the [Full Stack Open 2021](https://fullstackope
 ## Table of Content
 
 - [Part 0: Fundamentals of Web apps](./part0)
-  - [0.4: new note](part0/0.4.png)
-  - [0.5: Single page app](part0/0.5.png)
-  - [0.6: New note](part0/0.6.png)
+  - [0.4: new note](part0/0.4)
+  - [0.5: Single page app](part0/0.5)
+  - [0.6: New note](part0/0.6)
