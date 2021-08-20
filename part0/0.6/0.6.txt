@@ -1,1 +1,16 @@
+title Exercise 0.6: New note (SPA Method)
 
+
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/spa
+
+note over browser:
+Browser sends json data to server with POST request
+end note
+
+server->browser: Status Code:201 Created
+
+
+note over browser:
+Event handler renders note to page (redraw() function does not need to GET all notes from server)
+end note
