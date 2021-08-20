@@ -4,9 +4,9 @@
 
 ## Table of Content
 
-- [0.4: New note](./0.4/0.4.png)
+- [0.4: New note](./0.4/0.4.png) (Traditional Method)
 - [0.5: Single page app](./0.5/0.5.png)
-- [0.6: New note](./0.6/0.6.png)
+- [0.6: New note](./0.6/0.6.png) (Single page app - SPA Method)
 
 ## About the Diagram
 
