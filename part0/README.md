@@ -8,9 +8,6 @@
 - [0.5: Single page app](./0.5/0.5.png)
 - [0.6: New note](./0.6/0.6.png) (Single page app - SPA Method)
 
-## About the Diagram
-
-Some of the diagrams are powered by [mermaid](https://github.com/mermaid-js/mermaid).
 
 ## Useful links
 
