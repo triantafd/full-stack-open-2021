@@ -12,3 +12,7 @@ This project is the exercises of the [Full Stack Open 2021](https://fullstackope
   - [0.4: New note (Traditional method)](part0/0.4)
   - [0.5: Single page app](part0/0.5)
   - [0.6: New note (Single page app method)](part0/0.6)
+- [Part 1: Introduction to React](./part1)
+  - [1.1-1.5: courseinfo](part1/courseinfo)
+  - [1.6-1.11: unicafe](part1/unicafe)
+  - [1.12-1.14: anecdotes](part1/anecdotes)
