@@ -16,3 +16,7 @@ This project is the exercises of the [Full Stack Open 2021](https://fullstackope
   - [1.1-1.5: courseinfo](part1/courseinfo)
   - [1.6-1.11: unicafe](part1/unicafe)
   - [1.12-1.14: anecdotes](part1/anecdotes)
+
+## Resources
+
+[Zero Toro] (https://github.com/Zeroto521)
