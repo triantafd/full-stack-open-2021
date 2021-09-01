@@ -84,7 +84,7 @@ const App = (props) => {
     const deletedPerson = persons.filter(p => p.id === id);
     const isDelete = window.confirm(`delete ${deletedPerson[0].name}?`);
 
-    if ( isDelete ) {
+    if (isDelete) {
       Service
         .delete(id)
         .then(() => {
@@ -99,6 +99,7 @@ const App = (props) => {
     }
   }
 
+  console.log(errorMessage)
   return (
     <div>
       <Title name={'Phonebook'} />

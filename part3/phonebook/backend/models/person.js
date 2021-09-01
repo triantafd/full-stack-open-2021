@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-/* const uniqueValidator = require('mongoose-unique-validator'); */
+const uniqueValidator = require('mongoose-unique-validator');
 
 /* mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);  */
@@ -28,7 +28,7 @@ const personSchema = new mongoose.Schema({
   }
 })
 
-/* personSchema.plugin(uniqueValidator) */
+personSchema.plugin(uniqueValidator)
 
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {

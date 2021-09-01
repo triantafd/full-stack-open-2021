@@ -6,7 +6,7 @@ const cors = require('cors')
 
 
 //PORT
-const PORT = process.env.PORT || 3001
+const PORT = 3001 || process.env.PORT
 console.log(process.env.PORT)
 
 //Models
@@ -139,10 +139,10 @@ app.delete('/api/persons/:id', (request, response, next) => {
   return maxId + 1
 } */
 
-const generateId = () => {
+/* const generateId = () => {
   let id = Math.floor(Math.random() * Math.floor(100000))
   return id
-}
+} */
 
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
