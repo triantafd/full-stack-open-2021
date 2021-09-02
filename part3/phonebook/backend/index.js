@@ -6,7 +6,7 @@ const cors = require('cors')
 
 
 //PORT
-const PORT = 3001 || process.env.PORT
+const PORT =  process.env.PORT || 3001 
 console.log(process.env.PORT)
 
 //Models
