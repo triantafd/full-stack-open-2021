@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useField } from './hooks'
 
 import {
   BrowserRouter as Router,
@@ -83,9 +84,16 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+  /*  const [content, setContent] = useState('')
+   const [author, setAuthor] = useState('')
+   const [info, setInfo] = useState('') 
+   */
+
+  //custom hooks
+  const content = useField('text')
+  const author = useField('text')
+  const info = useField('text')
+
   const history = useHistory()
 
   const handleSubmit = (e) => {
@@ -101,9 +109,14 @@ const CreateNew = (props) => {
 
   const handleReset = (e) => {
     e.preventDefault()
-    setContent('')
+    /* setContent('')
     setAuthor('')
-    setInfo('')
+    setInfo('') 
+    */
+    // Custom hooks
+    content.reset()
+    author.reset()
+    info.reset()
   }
   return (
     <div>
@@ -111,15 +124,15 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input {...content.input} />
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input {...author.input} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e) => setInfo(e.target.value)} />
+          <input {...info.input} />
         </div>
         <button>create</button>
       </form>
