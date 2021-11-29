@@ -1,105 +1,57 @@
 import React, { useState, useEffect, useRef } from 'react'
 import blogService from './services/blogs'
-import loginService from './services/login'
-import Blog from './components/Blog'
+import { useSelector, useDispatch } from 'react-redux'
+import { initializeBlogs, createBlog } from './reducers/blogsReducer'
+import { initializeUsers } from './reducers/usersReducer'
+import { login, setUser } from './reducers/userReducer'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+import UserList from './components/UserList'
+import User from './components/User'
+import Notification from './components/Notification'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import BlogList from './components/BlogList'
+import BlogInfo from './components/BlogInfo'
+import NavMenu from './components/NavMenu'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
-
+  const user = useSelector(state => state.user)
+  //console.log('User', user, ' logged in')
   const blogFormRef = useRef()
 
-  const sortedblogs = [...blogs].sort((a, b) => b.likes - a.likes)
-
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
+    dispatch(initializeBlogs())
+    dispatch(initializeUsers())
   }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedappUser')
+    console.log('Only the first time enters here')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+      dispatch(setUser(user))
       blogService.setToken(user.token)
     }
   }, [])
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    try {
-      const user = await loginService.login({
-        username,
-        password,
-      })
-      console.log(user)
-      setUser(user)
-      console.log('MPIKAME MESA', user)
-      blogService.setToken(user.token)
-      window.localStorage.setItem('loggedappUser', JSON.stringify(user))
-      setUsername('')
-      setPassword('')
-    } catch (e) {
-      console.log(e)
-      if (e.message.includes('401')) {
-        handleMessage('Failed to authorize. Wrong login and/or password')
-      }
-    }
+    dispatch(login({ username, password }))
+    setUsername('')
+    setPassword('')
   }
 
-  const handleLike = async (post) => {
-    try {
-      post.likes += 1
-      const response = await blogService.update(post.id, post)
-      const newblogs = blogs.map((item) =>
-        item.id === post.id ? response : item
-      )
-      setBlogs(newblogs)
-    } catch (e) {
-      console.log(e)
-    }
+
+
+  const handleCreateBlog = async (entry) => {
+    blogFormRef.current.toggleVisibility()
+    dispatch(createBlog(entry))
   }
 
-  const handleDelete = async (post) => {
-    try {
-      post.likes += 1
-      await blogService.remove(post.id)
-      const newblogs = blogs.filter((i) => i.id !== post.id)
-      setBlogs(newblogs)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  const handleLogout = (event) => {
-    event.preventDefault()
-    console.log('')
-    window.localStorage.removeItem('loggedappUser')
-    setUser(null)
-  }
-
-  const createBlog = async (entry) => {
-    try {
-      const newOne = await blogService.create(entry)
-      setBlogs([...blogs, newOne])
-      handleMessage(newOne.title + 'has been created')
-      blogFormRef.current.toggleVisibility()
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  const handleMessage = (message) => {
-    setErrorMessage(message)
-    setTimeout(() => {
-      setErrorMessage('')
-    }, 5000)
-  }
 
   const loginForm = () => {
     return (
@@ -118,34 +70,39 @@ const App = () => {
   const blogForm = () => {
     return (
       <Togglable buttonLabel="New Blog" ref={blogFormRef}>
-        <BlogForm createBlog={createBlog} />
+        <BlogForm createBlog={handleCreateBlog} />
       </Togglable>
     )
   }
 
   return (
-    <div>
-      <h2>blogs</h2>
-      <h2 id="importantMessage">{errorMessage}</h2>
-      {user === null ? (
-        loginForm()
-      ) : (
-        <div>
-          <p>{user.name} is logged in</p>
-          <button onClick={handleLogout}>Log out</button>
-          {blogForm()}
-          {sortedblogs.map((blog) => (
-            <Blog
-              key={blog.id}
-              blog={blog}
-              handleLikeFunc={handleLike}
-              handleDeletionFunc={handleDelete}
-              currentUser={user}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <Router>
+      <div>
+        <NavMenu />
+        <Notification />
+        {user === null ? (
+          loginForm()
+        ) : (
+          <div>
+            {blogForm()}
+            <Switch>
+              <Route path="/blogs/:id">
+                <BlogInfo />
+              </Route>
+              <Route path="/blogs">
+                <BlogList />
+              </Route>
+              <Route path="/users/:id">
+                <User />
+              </Route>
+              <Route path="/users">
+                <UserList />
+              </Route>
+            </Switch>
+          </div>
+        )}
+      </div>
+    </Router>
   )
 }
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import Togglable from './Togglable'
-
+import { Link } from 'react-router-dom'
 
 const Blog = ({ blog, handleLikeFunc, handleDeletionFunc, currentUser }) => {
-  console.log('blog user ', blog, blog.user.username)
-  console.log('cur user', currentUser, currentUser.username)
+  console.log('In blog component blog is ', blog.user.username)
+  console.log('In blog component, User is ', currentUser.username)
 
   const blogStyle = {
     paddingTop: 10,
@@ -16,7 +16,7 @@ const Blog = ({ blog, handleLikeFunc, handleDeletionFunc, currentUser }) => {
 
   return (
     <div style={blogStyle}>
-      {blog.title} {blog.author}
+      <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link>
       <Togglable buttonLabel="details">
         {blog.url}
         <p className="likescount">{'Likes: ' + blog.likes}</p>
