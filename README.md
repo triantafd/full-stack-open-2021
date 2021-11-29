@@ -19,5 +19,6 @@ This project is the exercises of the [Full Stack Open 2021](https://fullstackope
 
 ## Resources
 
-[Zero Toro] (https://github.com/Zeroto521)
+1. [Zero Toro] (https://github.com/Zeroto521)
 
+2. [ze-kel] (https://github.com/ze-kel)
