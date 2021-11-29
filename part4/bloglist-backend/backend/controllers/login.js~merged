@@ -6,11 +6,6 @@ const logger = require('../utils/logger')
 
 loginRouter.post('/', async (request, response) => {
   const body = request.body
-<<<<<<< HEAD
-  console.log('MOLIS ESTILA TA CREDENTIALS', body)
-=======
-
->>>>>>> e75cfa981a5781a0dce6ff4c9047605309e7f913
   const user = await User.findOne({ username: body.username })
   logger.info(user)
   const passwordCorrect = user === null
@@ -33,12 +28,7 @@ loginRouter.post('/', async (request, response) => {
 
   response
     .status(200)
-<<<<<<< HEAD
-    //.send({ token, username: user.username, name: user.name })
-    .send({ result: "Result is ok"})
-=======
     .send({ token, username: user.username, name: user.name })
->>>>>>> e75cfa981a5781a0dce6ff4c9047605309e7f913
 })
 
 module.exports = loginRouter
